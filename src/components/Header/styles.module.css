@@ -1,0 +1,19 @@
+.nav {
+  display: flex;
+  flex-direction: row;
+}
+.link {
+  color: inherit;
+  text-decoration: none;
+  display: flex;
+  justify-content: center;
+  width: 100%;
+  padding: 12px;
+  border-radius: 12px;
+  transition: color var(--animation), background-color var(--animation);
+
+  @apply gap-3 text-primary-content hover:text-primary hover:bg-primary-content flex items-center;
+}
+.menu-icon {
+  margin-left: 0.25rem;
+}

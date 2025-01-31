@@ -1,0 +1,24 @@
+/* Analytic.module.css */
+.cardStyle {
+  @apply bg-base-300 shadow-md rounded-lg p-6;
+}
+
+.titleStyle {
+  @apply text-xl font-bold text-primary mb-4;
+}
+
+.listItemStyle {
+  @apply flex justify-between items-center py-2 border-b border-base-200 last:border-b-0;
+}
+
+.badgeStyle {
+  @apply badge badge-outline;
+}
+
+.scrollableContainer {
+  @apply flex overflow-x-auto pb-4;
+}
+
+.reviewerItem {
+  @apply flex-shrink-0 mx-2 text-center;
+}

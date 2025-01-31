@@ -1,0 +1,48 @@
+/* UserPage.module.css */
+.userContainer {
+  @apply container mx-auto p-4;
+}
+
+.title {
+  @apply text-3xl font-bold text-center mb-6;
+}
+
+.avatarContainer {
+  @apply relative w-32 h-32;
+}
+
+.avatar {
+  @apply w-full h-full rounded-full border-2 border-gray-300 object-cover;
+}
+
+.avatarEditButton {
+  @apply absolute bottom-0 right-0 bg-blue-500 p-1 rounded-full cursor-pointer hover:bg-blue-600;
+}
+
+.profileInfo {
+  @apply flex-1;
+}
+
+.editButton {
+  @apply absolute top-0 right-0;
+}
+
+.formContainer {
+  @apply space-y-4;
+}
+
+.inputField {
+  @apply w-full px-4 py-2 border rounded-lg focus:ring-2 focus:ring-blue-400;
+}
+
+.errorMessage {
+  @apply text-red-500 text-sm;
+}
+
+.saveButton {
+  @apply px-4 py-2 bg-blue-500 text-white rounded-lg hover:bg-blue-600;
+}
+
+.saveChangesButton {
+  @apply px-6 py-2 border-2 border-blue-500 text-blue-500 rounded-lg hover:bg-blue-500 hover:text-white transition;
+}

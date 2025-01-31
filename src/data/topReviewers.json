@@ -1,0 +1,65 @@
+[
+  {
+    "id": "1",
+    "name": "Олена Петрова",
+    "likes": 120,
+    "avatar": "https://i.pravatar.cc/150?img=1",
+    "description": "A film enthusiast who loves exploring indie movies and writing detailed reviews."
+  },
+  {
+    "id": "2",
+    "name": "Ігор Коваленко",
+    "likes": 110,
+    "avatar": "https://i.pravatar.cc/150?img=2",
+    "description": "A sci-fi fanatic with a passion for analyzing futuristic themes in movies."
+  },
+  {
+    "id": "3",
+    "name": "Марина Данилюк",
+    "likes": 100,
+    "avatar": "https://i.pravatar.cc/150?img=3",
+    "description": "Loves romantic comedies and always finds the perfect balance between humor and heart."
+  },
+  {
+    "id": "4",
+    "name": "Анна Романюк",
+    "likes": 90,
+    "avatar": "https://i.pravatar.cc/150?img=4",
+    "description": "A history buff who enjoys movies based on true events and historical dramas."
+  },
+  {
+    "id": "5",
+    "name": "Сергій Мельник",
+    "likes": 80,
+    "avatar": "https://i.pravatar.cc/150?img=5",
+    "description": "A fan of animated films and always highlights the artistry behind the animation."
+  },
+  {
+    "id": "6",
+    "name": "Олексій Кравець",
+    "likes": 70,
+    "avatar": "https://i.pravatar.cc/150?img=6",
+    "description": "A thriller junkie who loves dissecting plot twists and suspenseful moments."
+  },
+  {
+    "id": "7",
+    "name": "Юлія Соловей",
+    "likes": 60,
+    "avatar": "https://i.pravatar.cc/150?img=7",
+    "description": "A documentary lover who appreciates films that shed light on real-world issues."
+  },
+  {
+    "id": "8",
+    "name": "Дмитро Горбач",
+    "likes": 50,
+    "avatar": "https://i.pravatar.cc/150?img=8",
+    "description": "A fan of classic cinema and enjoys comparing modern films to timeless masterpieces."
+  },
+  {
+    "id": "9",
+    "name": "Софія Матвієнко",
+    "likes": 40,
+    "avatar": "https://i.pravatar.cc/150?img=9",
+    "description": "A horror movie fan who loves analyzing the psychology behind scary films."
+  }
+]

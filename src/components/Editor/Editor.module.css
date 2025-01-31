@@ -1,0 +1,24 @@
+/* Editor.module.css */
+
+.panel {
+  @apply bg-base-200 p-6 rounded-lg shadow-md;
+}
+
+.panelTitle {
+  @apply text-xl font-bold mb-4;
+}
+
+.inputField {
+  @apply input input-bordered w-full;
+}
+
+.textareaField {
+  @apply textarea textarea-bordered w-full h-64;
+}
+
+.characterCounter {
+  @apply text-sm text-gray-500 mt-2 text-right;
+}
+.modalButtonPrimary {
+  @apply btn btn-primary ml-auto;
+}
