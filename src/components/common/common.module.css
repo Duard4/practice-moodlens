@@ -13,7 +13,7 @@
   }
 }
 .search {
-  @apply bg-transparent  flex-grow px-2 focus:outline-none;
+  @apply bg-transparent flex-grow px-2 focus:outline-none w-full;
   &::placeholder {
     @apply text-base-content;
   }

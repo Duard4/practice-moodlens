@@ -1,8 +1,6 @@
 import { useNavigate } from 'react-router-dom';
-import EditBtn from '../common/btns/EditBtn';
-import TrashbinBtn from '../common/btns/TrashbinBtn';
 import Review from '../common/Review';
-import { Icon } from '../common';
+import Button from '../common/btns/Button';
 
 const ArchiveReview = ({ review, isCurrentUser, onDelete }) => {
   const navigate = useNavigate();
@@ -28,10 +26,14 @@ const ArchiveReview = ({ review, isCurrentUser, onDelete }) => {
   return (
     <Review review={review}>
       {isCurrentUser && (
-        <>
-          <EditBtn handleEdit={handleEdit} Icon={Icon} />
-          <TrashbinBtn handleDelete={handleDelete} Icon={Icon} />
-        </>
+        <div className="flex w-full sm:w-auto flex-row-reverse sm:flex-row justify-between gap-1">
+          <Button handleEdit={handleEdit} icon="edit" color="text-info" />
+          <Button
+            handleDelete={handleDelete}
+            icon="trashbin"
+            color="text-error"
+          />
+        </div>
       )}
     </Review>
   );

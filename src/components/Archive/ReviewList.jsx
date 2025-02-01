@@ -3,16 +3,19 @@ import ArchiveReview from './ArchiveReview';
 
 const ReviewList = ({ reviews, isCurrentUser, onDelete }) => {
   return (
-    <div className={styles.reviewList}>
+    <div>
       <h2 className={styles.archiveTitle}>Рецензії</h2>
-      {reviews.map((review) => (
-        <ArchiveReview
-          key={review.id}
-          review={review}
-          isCurrentUser={isCurrentUser}
-          onDelete={onDelete}
-        />
-      ))}
+      <ul>
+        {reviews.map((review) => (
+          <li key={review.id}>
+            <ArchiveReview
+              review={review}
+              isCurrentUser={isCurrentUser}
+              onDelete={onDelete}
+            />
+          </li>
+        ))}
+      </ul>
     </div>
   );
 };

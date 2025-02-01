@@ -1,9 +1,9 @@
 import { useState } from 'react';
 import { Link, useParams } from 'react-router-dom';
-import Icon from '/src/components/common/Icon';
 import CommentInput from '../components/ReviewDetail/CommentInput';
 import CommentList from '../components/ReviewDetail/CommentList';
 import reviewsData from '/src/data/reviews.json'; // Example data
+import BaseButtons from '../components/common/btns/BaseButtons';
 
 const ReviewDetail = () => {
   const { id } = useParams();
@@ -34,25 +34,18 @@ const ReviewDetail = () => {
       {/* Review Content */}
       <div className="card bg-base-200 shadow-xl p-6 mb-6">
         <h2 className="text-xl font-bold mt-4">{review.movieTitle}</h2>
-        <div className="flex justify-between">
+        <div className="flex justify-between mt-2 mb-3">
           <Link to={`/archive/${review.userId}`}>
-            <span className="text-md opacity-75 mt-1 cursor-pointer mb-3 hover:text-secondary">
+            <span className="text-md opacity-75  cursor-pointer hover:text-secondary">
               {review.author}
             </span>
           </Link>
-          <span className="text-md opacity-50 mt-1 mb-3">04.04.2004</span>
+          <span className="text-md opacity-50">04.04.2004</span>
         </div>
 
         <p className="text-base-100-content">{review.content}</p>
-        <div className="flex justify-end  mt-4">
-          <button type="button" className="btn btn-ghost">
-            <Icon icon="thumb-down" classes="w-6 h-6 text-error" />
-            <p className="text-error">{review.countDislikes}</p>
-          </button>
-          <button type="button" className="btn btn-ghost">
-            <Icon icon="thumb-up" classes="w-6 h-6 text-success" />
-            <p className="text-success">{review.countLikes}</p>
-          </button>
+        <div className="flex mt-2">
+          <BaseButtons review={review} />
         </div>
       </div>
 

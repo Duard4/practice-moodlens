@@ -12,14 +12,14 @@ const CommentInput = ({ onAddComment }) => {
   };
 
   return (
-    <form onSubmit={handleSubmit} className="mt-6">
-      <div className="flex gap-2">
+    <form onSubmit={handleSubmit} className="mt-2 sm:mt-5">
+      <div className="flex flex-col sm:flex-row gap-2">
         <input
           type="text"
           value={comment}
           onChange={(e) => setComment(e.target.value)}
           placeholder="Додати коментар..."
-          className="input input-bordered flex-1"
+          className="input input-bordered w-full p-3 flex-1"
         />
         <button type="submit" className="btn btn-primary">
           Надіслати

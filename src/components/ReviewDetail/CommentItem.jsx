@@ -6,22 +6,18 @@ const CommentItem = ({ comment }) => {
 
   return (
     <div className="border-b border-base-300 py-4">
-      <div className="flex items-center gap-4">
-        {/* User Avatar */}
-        <div className="avatar">
+      <div className="flex flex-col  gap-4">
+        <div className="avatar flex items-center">
           <div className="w-12 h-12 rounded-full">
             <img src={user?.avatar} alt={user?.name} />
           </div>
+          <p className="font-semibold text-primary ml-3">{user?.name}</p>
         </div>
-
-        {/* Comment Content */}
         <div className="flex-1">
-          <p className="font-semibold text-primary">{user?.name}</p>
           <p className="text-base-100-content">{comment.content}</p>
         </div>
 
-        {/* Like/Dislike Buttons */}
-        <div className="flex gap-2">
+        <div className="flex gap-2 ml-auto">
           <button type="button" className="btn btn-ghost">
             <Icon icon="thumb-down" classes="w-6 h-6 text-error" />
             <p className="text-error">{comment.dislikes || 0}</p>

@@ -19,10 +19,10 @@ const Filter = () => {
   };
 
   return (
-    <div className="flex flex-col gap-4 p-4 bg-base-300 rounded-lg shadow-lg">
+    <div className="flex flex-col gap-2 sm:gap-4 p-4 bg-base-300 rounded-lg shadow-lg">
       <div className="flex flex-col md:flex-row gap-4">
         {/* Search Field */}
-        <div className="flex items-center bg-base-200 rounded-lg p-2 flex-grow">
+        <div className="flex items-center bg-base-200 rounded-lg p-2 flex-grow  h-12 md:h-16">
           <input type="text" placeholder="Пошук..." className={style.search} />
           <button className="btn btn-ghost btn-circle">
             <Icon icon="search" classes="w-6 h-6" />
@@ -30,8 +30,8 @@ const Filter = () => {
         </div>
 
         {/* Sorting Options */}
-        <div className="flex items-center gap-4 justify-between">
-          <select className="select select-bordered shrink-0 max-w-xs">
+        <div className="flex flex-col sm:flex-row items-center gap-1 sm:gap-4 justify-between">
+          <select className="select select-bordered h-12 md:h-16 shrink-0 sm:max-w-xs w-full md:w-auto">
             <option disabled defaultValue>
               Сортувати за
             </option>
@@ -39,7 +39,7 @@ const Filter = () => {
             <option>Назвою</option>
             <option>Популярністю</option>
           </select>
-          <label className="label cursor-pointer gap-2">
+          <label className="label cursor-pointer ml-auto gap-2">
             <span className="label-text">Інверсія</span>
             <input type="checkbox" className="checkbox" />
           </label>
@@ -50,9 +50,9 @@ const Filter = () => {
       <div className="collapse collapse-arrow bg-base-200">
         <input type="checkbox" />
         <div className="collapse-title font-medium">Фільтри</div>
-        <div className="collapse-content flex flex-col gap-4">
+        <div className="collapse-content flex flex-col gap-1 sm:gap-4">
           {/* Date Filter */}
-          <div className="flex flex-col md:flex-row gap-4">
+          <div className="flex flex-col md:flex-row gap-1 sm:gap-4">
             <div className="form-control flex-grow">
               <label className="label">
                 <span className="label-text">Початкова дата</span>

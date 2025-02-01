@@ -1,7 +1,8 @@
 import toast from 'react-hot-toast';
-import ComplaintForm from '../ComplaintForm'; // A new component for the form
+import ComplaintForm from '../ComplaintForm';
+import Button from './Button';
 
-const ReportBtn = ({ reviewId, Icon }) => {
+const ReportBtn = ({ reviewId, ...rest }) => {
   const handleReport = () => {
     toast.custom(
       (t) => (
@@ -21,15 +22,7 @@ const ReportBtn = ({ reviewId, Icon }) => {
     );
   };
 
-  return (
-    <button
-      type="button"
-      className="btn btn-ghost mr-auto"
-      onClick={handleReport}
-    >
-      <Icon icon="flag" classes="h-5 w-5 text-error" />
-    </button>
-  );
+  return <Button {...rest} onClick={handleReport} classes="mr-auto" />;
 };
 
 export default ReportBtn;

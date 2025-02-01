@@ -19,10 +19,6 @@
   @apply text-base-content;
 }
 
-.reviewList {
-  @apply bg-base-200 p-6 rounded-lg shadow-md;
-}
-
 .reviewItem {
   @apply border-b border-base-300 py-4 last:border-b-0;
 }

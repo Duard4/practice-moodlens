@@ -1,30 +1,21 @@
 import SentimentLabel from './SentimentLabel';
-import ReportBtn from './btns/ReportBtn';
-import DislikeBtn from './btns/DislikeBtn';
-import LikeBtn from './btns/LikeBtn';
-import CommentBtn from './btns/CommentBtn';
-import Icon from './Icon';
 import { Link } from 'react-router-dom';
+import BaseButtons from './btns/BaseButtons';
 const Review = ({ review, children }) => {
   return (
-    <div className="card bg-base-300 shadow-xl shadow-base-300-content h-full">
-      <div className="card-body">
-        <h3 className="card-title">
-          {review.title}
+    <div className="card bg-base-300 shadow-xl shadow-base-300-content h-full w-auto min-w-0">
+      <div className="card-body p-4 sm:p-8">
+        <h3 className="card-title ">
+          <span className="mb-1">{review.title}</span>
           <SentimentLabel sentiment={review.sentiment} />
         </h3>
-        <h4 className="text-secondary-content">{review.movieTitle}</h4>
+        <h4 className="text-base-100-content">{review.movieTitle}</h4>
         <Link to={`/reviews/${review.id}`}>
           <p className="line-clamp-5 text-ellipsis">{review.content}</p>
         </Link>
-        <div className="card-actions justify-end items-center mt-2">
+        <div className="flex flex-wrap card-actions justify-end items-center mt-2">
           {children}
-          <ReportBtn reviewId={review.id} Icon={Icon} />
-          <DislikeBtn Icon={Icon}>{review.countDislikes}</DislikeBtn>
-          <LikeBtn Icon={Icon}>{review.countLikes}</LikeBtn>
-          <Link to={`/reviews/${review.id}#comments`}>
-            <CommentBtn Icon={Icon} />
-          </Link>
+          <BaseButtons review={review} />
         </div>
       </div>
     </div>
