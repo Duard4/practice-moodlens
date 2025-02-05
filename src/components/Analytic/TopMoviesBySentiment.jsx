@@ -1,7 +1,7 @@
+import { Link } from 'react-router-dom';
 import styles from './Analytic.module.css';
 
 const TopMoviesBySentiment = () => {
-  // Example data
   const topMoviesBySentiment = [
     { id: 1, title: 'Movie1', positivePercentage: 95 },
     { id: 2, title: 'Movie2', positivePercentage: 90 },
@@ -21,7 +21,10 @@ const TopMoviesBySentiment = () => {
       <ul>
         {topMoviesBySentiment.map((movie) => (
           <li key={movie.id} className={styles.listItemStyle}>
-            <span>{movie.title}</span>
+            <Link to={`/reviews?title=${movie.title}`}>
+              <span>{movie.title}</span>
+            </Link>
+
             <span className={styles.badgeStyle}>
               {movie.positivePercentage}% позитивних
             </span>

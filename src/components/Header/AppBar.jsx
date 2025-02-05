@@ -1,10 +1,11 @@
 import { useState } from 'react';
-import Icon from '../common/Icon'; // Your Icon component
-import ThemeController from './ThemeController'; // Your ThemeController component
 import { Link } from 'react-router-dom';
+
 import MenuConent from './MenuConent';
-import styles from './styles.module.css';
 import Drawer from './Drawer';
+import Icon from '../common/Icon';
+import ThemeController from './ThemeController';
+
 const AppBar = ({ isAuthorized = true }) => {
   const [isDrawerOpen, setIsDrawerOpen] = useState(false);
 
@@ -14,7 +15,7 @@ const AppBar = ({ isAuthorized = true }) => {
     <header className="w-full bg-primary text-primary-content  shadow-md">
       <div className="container mx-auto flex items-center justify-between p-4">
         <Link to="/">
-          <p className="text-2xl font-bold text-primary-content transition-colors hover:text-base-100">
+          <p className="text-2xl font-bold text-primary-content transition-colors hover:text-white">
             MoodLens
           </p>
         </Link>

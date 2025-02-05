@@ -1,6 +1,8 @@
 import toast from 'react-hot-toast';
+import { NavLink } from 'react-router-dom';
 
 const Footer = () => {
+  const id = 1;
   const handleSubmit = (e) => {
     e.preventDefault();
     toast.success('Створено підписку на поштову розсилку', {
@@ -16,33 +18,36 @@ const Footer = () => {
             <h3 className="text-lg font-bold mb-4">Навігація</h3>
             <ul className="space-y-2">
               <li>
-                <a href="/" className="hover:text-primary transition-colors">
+                <NavLink
+                  to="/"
+                  className="hover:text-primary transition-colors"
+                >
                   Головна
-                </a>
+                </NavLink>
               </li>
               <li>
-                <a
-                  href="/reviews"
+                <NavLink
+                  to="/reviews"
                   className="hover:text-primary transition-colors"
                 >
                   Рецензії
-                </a>
+                </NavLink>
               </li>
               <li>
-                <a
-                  href="/editor"
+                <NavLink
+                  to="/editor"
                   className="hover:text-primary transition-colors"
                 >
                   Едітор
-                </a>
+                </NavLink>
               </li>
               <li>
-                <a
-                  href="/archive"
+                <NavLink
+                  to={`/archive/${id}`}
                   className="hover:text-primary transition-colors"
                 >
                   Архів
-                </a>
+                </NavLink>
               </li>
             </ul>
           </div>
@@ -100,7 +105,7 @@ const Footer = () => {
           </div>
 
           <div className="md:col-span-2">
-            <h3 className="text-lg font-bold mb-4">Підписуйся на новини</h3>
+            {/* <h3 className="text-lg font-bold mb-4">Підписуйся на новини</h3>
             <form onSubmit={handleSubmit} className="flex flex-col space-y-4">
               <input
                 type="email"
@@ -111,7 +116,7 @@ const Footer = () => {
               <button type="submit" className="btn btn-primary">
                 Підписатись
               </button>
-            </form>
+            </form> */}
           </div>
         </div>
       </div>

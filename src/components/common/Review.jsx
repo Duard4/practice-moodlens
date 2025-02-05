@@ -9,7 +9,11 @@ const Review = ({ review, children }) => {
           <span className="mb-1">{review.title}</span>
           <SentimentLabel sentiment={review.sentiment} />
         </h3>
-        <h4 className="text-base-100-content">{review.movieTitle}</h4>
+        <div className="flex justify-between">
+          <h4 className="text-base-100-content">{review.movieTitle}</h4>
+          <span className="text-md opacity-50">04.04.2004</span>
+        </div>
+
         <Link to={`/reviews/${review.id}`}>
           <p className="line-clamp-5 text-ellipsis">{review.content}</p>
         </Link>

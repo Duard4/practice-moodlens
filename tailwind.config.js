@@ -28,8 +28,8 @@ export default withMT({
           accent: '#f59e0b', // Amber
           neutral: '#f3f4f6', // Light gray
           'base-100': '#ffffff', // White
-          'base-200': '#f9fafb', // Slightly off-white
-          'base-300': '#e5e7eb', // Light gray for borders
+          'base-200': '#e5e7eb', // Slightly off-white
+          'base-300': '#f9fafb', // Light gray for borders
           'base-content': '#1f2937', // Dark gray for text
           info: '#3b82f6', // Blue
           success: '#10b981', // Green

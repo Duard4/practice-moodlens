@@ -4,6 +4,7 @@
 }
 
 .titleStyle {
+  text-shadow: 1px 1px 1px darkslategray;
   @apply text-xl font-bold text-primary mb-4;
 }
 
