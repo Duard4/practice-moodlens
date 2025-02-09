@@ -1,19 +1,67 @@
 <!doctype html>
-<html lang="en" data-theme="dark">
+<html lang="uk" dir="ltr" data-theme="dark" itemscope itemtype="https://schema.org/WebApplication">
 
 <head>
   <meta charset="UTF-8" />
-  <link type="image/png" sizes="16x16" rel="icon" href="favicon/icons8-popcorn-arcade-16.png">
-  <link type="image/png" sizes="32x32" rel="icon" href="favicon/icons8-popcorn-arcade-32.png">
-  <link type="image/png" sizes="72x72" rel="icon" href="favicon/icons8-popcorn-arcade-72.png">
-  <link type="image/png" sizes="96x96" rel="icon" href="favicon/icons8-popcorn-arcade-96.png">
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Vite + React</title>
+
+  <!-- Primary Meta Tags -->
+  <title>MoodLens: Платформа для аналізу та обміну кінорецензіями</title>
+  <meta name="title" content="MoodLens: Платформа для аналізу та обміну кінорецензіями">
+  <meta name="description"
+    content="Створюйте, зберігайте та аналізуйте кінорецензії. Переглядайте архіви, ставте реакції, коментуйте та отримуйте аналітику настроїв.">
+  <meta name="keywords" content="кінорецензії, аналіз настроїв, аналітика фільмів, реакції, українська мова, NLP, ML">
+
+  <!-- Favicon & App Icons -->
+  <link rel="apple-touch-icon" sizes="180x180" href="/favicon/apple-touch-icon.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/favicon/favicon-32x32.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/favicon/favicon-16x16.png">
+
+  <!-- Open Graph -->
+  <meta property="og:type" content="website">
+  <meta property="og:url" content="https://practice-moodlens.vercel.app">
+  <meta property="og:title" content="MoodLens: Платформа для аналізу та обміну кінорецензіями">
+  <meta property="og:description"
+    content="Створюйте, зберігайте та аналізуйте кінорецензії. Переглядайте архіви, ставте реакції, коментуйте та отримуйте аналітику настроїв.">
+  <meta property="og:image" content="/og-image.png">
+
+
+  <!-- Schema.org -->
+  <meta itemprop="name" content="MoodLens">
+  <meta itemprop="description" content="Платформа для аналізу, збереження та обміну кінорецензіями.">
+  <meta itemprop="image" content="/og-image.png">
+
+  <!-- Canonical URL -->
+  <link rel="canonical" href="https://practice-moodlens.vercel.app" />
 </head>
 
-<body>
+<body itemscope itemtype="https://schema.org/WebPage">
   <div id="root"></div>
   <script type="module" src="/src/main.jsx"></script>
+
+  <!-- Structured Data -->
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "WebApplication",
+    "name": "MoodLens",
+    "description": "Платформа для аналізу, збереження та обміну кінорецензіями з функціями аналітики, реакцій та коментарів.",
+    "applicationCategory": ["DataAnalysis", "SocialNetworking"],
+    "operatingSystem": "Web",
+    "featureList": [
+      "Створення і аналіз рецензій",
+      "Перегляд рецензій",
+      "Аналітика настроїв",
+      "Реакції (лайки/дизлайки)",
+      "Коментарі до рецензій"
+    ],
+    "offers": {
+      "@type": "Offer",
+      "price": "0",
+      "priceCurrency": "UAH"
+    }
+  }
+  </script>
 </body>
 
 </html>
