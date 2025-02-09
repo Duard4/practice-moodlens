@@ -1,20 +1,23 @@
 import ReportBtn from './ReportBtn';
 import Button from './Button';
 import { Link } from 'react-router-dom';
+import LikeDislikeButton from './LikeDislikeButton';
 
 const BaseButtons = ({ review }) => {
   return (
     <>
-      <ReportBtn reviewId={review.id} icon="flag" color="text-error" />
+      <ReportBtn
+        reviewId={review.id}
+        icon="flag"
+        classes="mr-auto hover:text-error"
+      />
 
-      <Button icon="thumb-down" color="text-error">
-        {review.countDislikes}
-      </Button>
-      <Button icon="thumb-up" color="text-success">
-        {review.countLikes}
-      </Button>
+      <LikeDislikeButton
+        initialDislikes={review.countDislikes}
+        initialLikes={review.countLikes}
+      />
       <Link to={`/reviews/${review.id}#comments`}>
-        <Button icon="comments" color="text-info" />
+        <Button icon="comments" classes="hover:text-info" />
       </Link>
     </>
   );

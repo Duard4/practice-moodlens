@@ -6,7 +6,6 @@ import style from './common.module.css';
 const Filter = () => {
   const [searchParams, setSearchParams] = useSearchParams();
 
-  // Create initial values object directly from URLSearchParams
   const initialValues = {
     title: searchParams.get('title') || '',
     startDate: searchParams.get('startDate') || '',
@@ -146,6 +145,7 @@ const Filter = () => {
                 className="input input-bordered w-full"
                 placeholder={`Введіть ${field}`}
                 {...formik.getFieldProps(field)}
+                min="0" // Додаємо атрибут min="0" для запобігання введення від'ємних значень
               />
             </div>
           ))}

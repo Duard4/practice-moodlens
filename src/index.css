@@ -9,7 +9,9 @@
   -moz-osx-font-smoothing: grayscale;
   --animation: 250ms ease-in-out;
 }
-
+body {
+  @apply bg-gradient-to-br from-base-200 to-base-300;
+}
 a.active {
   @apply text-primary bg-primary-content;
 }

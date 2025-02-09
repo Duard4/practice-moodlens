@@ -1,8 +1,17 @@
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 
 const EditField = ({ onContentChange, onLengthChange, initialContent }) => {
   const [content, setContent] = useState(initialContent);
   const maxLength = 10000;
+
+  useEffect(() => {
+    const savedContent = localStorage.getItem('content');
+    if (savedContent) setContent(savedContent);
+  }, []);
+
+  useEffect(() => {
+    localStorage.setItem('content', content);
+  }, [content]);
 
   const handleChange = (e) => {
     const newContent = e.target.value;

@@ -1,14 +1,14 @@
 import Icon from '../Icon';
 
-const Button = ({ children, icon, color, onClick, classes }) => {
+const Button = ({ icon, children, classes, ...props }) => {
   return (
     <button
       type="button"
-      className={`btn p-1 sm:p-2 md:p-3 btn-ghost ${classes}`}
-      onClick={onClick}
+      className={`btn p-1 sm:p-2 md:p-3 btn-ghost text-base-content ${classes}`}
+      {...props}
     >
-      <Icon icon={icon} classes={`w-6 h-6 ${color}`} />
-      {children && <p className={color}>{children}</p>}
+      {icon && <Icon icon={icon} classes={`w-6 h-6  fill-current`} />}
+      {children}
     </button>
   );
 };

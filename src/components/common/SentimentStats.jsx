@@ -11,6 +11,7 @@ const ReviewSentimentStats = ({ reviews }) => {
     });
     const total = counts.negative + counts.neutral + counts.positive;
     return {
+      total,
       negative: Math.round((counts.negative / total) * 100) || 0,
       neutral: Math.round((counts.neutral / total) * 100) || 0,
       positive: Math.round((counts.positive / total) * 100) || 0,
@@ -33,20 +34,22 @@ const ReviewSentimentStats = ({ reviews }) => {
           Позитивний: {sentimentCounts.positive}%
         </span>
       </div>
-      <div className="flex w-full h-3 rounded-full overflow-hidden">
-        <div
-          className="bg-red-300 transition-all duration-300"
-          style={{ width: `max(${sentimentCounts.negative}%, 1%)` }}
-        ></div>
-        <div
-          className="bg-yellow-300 transition-all duration-300"
-          style={{ width: `max(${sentimentCounts.neutral}%, 1%)` }}
-        ></div>
-        <div
-          className="bg-green-300 transition-all duration-300"
-          style={{ width: `max(${sentimentCounts.positive}%, 1%)` }}
-        ></div>
-      </div>
+      {sentimentCounts.total !== 0 && (
+        <div className="flex w-full h-3 rounded-full overflow-hidden">
+          <div
+            className="bg-red-300 transition-all duration-300"
+            style={{ width: `max(${sentimentCounts.negative}%, 1%)` }}
+          ></div>
+          <div
+            className="bg-yellow-300 transition-all duration-300"
+            style={{ width: `max(${sentimentCounts.neutral}%, 1%)` }}
+          ></div>
+          <div
+            className="bg-green-300 transition-all duration-300"
+            style={{ width: `max(${sentimentCounts.positive}%, 1%)` }}
+          ></div>
+        </div>
+      )}
     </div>
   );
 };

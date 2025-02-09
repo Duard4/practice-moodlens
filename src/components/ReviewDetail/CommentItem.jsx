@@ -1,4 +1,4 @@
-import Icon from '/src/components/common/Icon';
+import LikeDislikeButton from '../common/btns/LikeDislikeButton';
 import userData from '/src/data/topReviewers.json';
 
 const CommentItem = ({ comment }) => {
@@ -18,14 +18,10 @@ const CommentItem = ({ comment }) => {
         </div>
 
         <div className="flex gap-2 ml-auto">
-          <button type="button" className="btn btn-ghost">
-            <Icon icon="thumb-down" classes="w-6 h-6 text-error" />
-            <p className="text-error">{comment.dislikes || 0}</p>
-          </button>
-          <button type="button" className="btn btn-ghost">
-            <Icon icon="thumb-up" classes="w-6 h-6 text-success" />
-            <p className="text-success">{comment.likes || 0}</p>
-          </button>
+          <LikeDislikeButton
+            initialDislikes={comment.countDislikes}
+            initialLikes={comment.countLikes}
+          />
         </div>
       </div>
     </div>

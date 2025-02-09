@@ -1,6 +1,6 @@
 /* Archive.module.css */
 .archiveContainer {
-  @apply container mx-auto p-4 flex flex-col gap-7;
+  @apply flex flex-col gap-7;
 }
 
 .archiveTitle {

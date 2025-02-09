@@ -5,7 +5,7 @@ import TopMoviesBySentiment from '../components/Analytic/TopMoviesBySentiment';
 
 const AnalyticsPage = () => {
   return (
-    <div className="container mx-auto p-4">
+    <section>
       <h1
         className="text-3xl font-bold text-primary mb-4"
         style={{
@@ -21,7 +21,7 @@ const AnalyticsPage = () => {
         <TopMoviesByReviews />
         <TopMoviesBySentiment />
       </div>
-    </div>
+    </section>
   );
 };
 

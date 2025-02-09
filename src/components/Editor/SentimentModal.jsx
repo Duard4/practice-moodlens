@@ -1,13 +1,21 @@
 import { useState } from 'react';
 
 const SentimentModal = ({ sentiment, onConfirm, onCancel }) => {
-  const [isCorrect, setIsCorrect] = useState(null);
+  const [isCorrect, setIsCorrect] = useState(true);
   const [selectedSentiment, setSelectedSentiment] = useState(sentiment);
 
   const sentiments = ['positive', 'neutral', 'negative'];
 
+  const isConfirmDisabled =
+    isCorrect === false && selectedSentiment === sentiment;
+
   const handleSubmit = () => {
+    if (isConfirmDisabled) return;
     onConfirm(selectedSentiment);
+  };
+
+  const handleCancel = () => {
+    onCancel();
   };
 
   return (
@@ -19,10 +27,9 @@ const SentimentModal = ({ sentiment, onConfirm, onCancel }) => {
           <span className="font-semibold">{sentiment}</span>.
         </p>
 
-        {/* Was that correct? */}
         <div className="mb-4">
           <p className="mb-2">Чи дійсне це твердження?</p>
-          <div className="flex gap-4">
+          <div className="flex gap-4 justify-center flex-row-reverse">
             <button
               className={`btn ${
                 isCorrect === true ? 'btn-primary' : 'btn-ghost'
@@ -42,11 +49,10 @@ const SentimentModal = ({ sentiment, onConfirm, onCancel }) => {
           </div>
         </div>
 
-        {/* Sentiment Correction (if "No" is selected) */}
         {isCorrect === false && (
           <div className="mb-4">
             <p className="mb-2">Будь ласка оберіть вірний настрій:</p>
-            <div className="flex gap-4">
+            <div className="flex gap-4 flex-row-reverse justify-center">
               {sentiments.map((sent) => (
                 <button
                   key={sent}
@@ -54,6 +60,7 @@ const SentimentModal = ({ sentiment, onConfirm, onCancel }) => {
                     selectedSentiment === sent ? 'btn-primary' : 'btn-ghost'
                   }`}
                   onClick={() => setSelectedSentiment(sent)}
+                  disabled={sent === sentiment}
                 >
                   {sent}
                 </button>
@@ -64,10 +71,14 @@ const SentimentModal = ({ sentiment, onConfirm, onCancel }) => {
 
         {/* Buttons */}
         <div className="flex justify-end gap-4 mt-6">
-          <button className="btn btn-ghost" onClick={onCancel}>
+          <button className="btn btn-ghost" onClick={handleCancel}>
             Відмінити
           </button>
-          <button className="btn btn-primary" onClick={handleSubmit}>
+          <button
+            className="btn btn-primary"
+            onClick={handleSubmit}
+            disabled={isConfirmDisabled}
+          >
             Підтвердити
           </button>
         </div>

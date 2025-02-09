@@ -27,8 +27,12 @@ const ArchiveReview = ({ review, isCurrentUser, onDelete }) => {
     <Review review={review}>
       {isCurrentUser && (
         <div className="flex w-full sm:w-auto flex-row-reverse sm:flex-row justify-between gap-1">
-          <Button onClick={handleEdit} icon="edit" color="text-info" />
-          <Button onClick={handleDelete} icon="trashbin" color="text-error" />
+          <Button onClick={handleEdit} icon="edit" classes="hover:text-info" />
+          <Button
+            onClick={handleDelete}
+            icon="trashbin"
+            classes="hover:text-error"
+          />
         </div>
       )}
     </Review>

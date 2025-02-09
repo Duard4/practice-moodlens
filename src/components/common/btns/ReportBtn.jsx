@@ -22,7 +22,7 @@ const ReportBtn = ({ reviewId, ...rest }) => {
     );
   };
 
-  return <Button {...rest} onClick={handleReport} classes="mr-auto" />;
+  return <Button {...rest} onClick={handleReport} />;
 };
 
 export default ReportBtn;
