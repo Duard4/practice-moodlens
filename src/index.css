@@ -19,6 +19,9 @@ a.active {
 footer a.active {
   @apply bg-transparent;
 }
+.icon-size {
+  @apply w-6 h-6;
+}
 
 #root {
   display: flex;

@@ -1,13 +1,12 @@
 import { useSearchParams } from 'react-router-dom';
 
-const useFilteredReviews = (reviews) => {
+const useFilterReviews = (reviews) => {
   const [searchParams] = useSearchParams();
 
   const titleFilter = searchParams.get('title') || '';
   const startDate = searchParams.get('startDate');
   const endDate = searchParams.get('endDate');
   const minLikes = parseInt(searchParams.get('minLikes')) || 0;
-  const minSymbols = parseInt(searchParams.get('minSymbols')) || 0;
   const maxDislikes = parseInt(searchParams.get('maxDislikes')) || Infinity;
   const sortBy = searchParams.get('sortBy') || 'date';
   const invert = searchParams.get('invert') === 'true';
@@ -17,14 +16,18 @@ const useFilteredReviews = (reviews) => {
 
   const filteredReviews = reviews
     .filter((review) => {
-      return (
-        review.title.toLowerCase().includes(titleFilter.toLowerCase()) &&
+      const titleMatch =
+        review.title?.toLowerCase().includes(titleFilter.toLowerCase()) ||
+        review.movieTitle?.toLowerCase().includes(titleFilter.toLowerCase());
+      const dateMatch =
         (!startDate || review.date >= startDate) &&
-        (!endDate || review.date <= endDate) &&
-        review.countLikes >= minLikes &&
-        review.content.length >= minSymbols &&
-        review.countDislikes <= maxDislikes &&
-        moods.includes(review.sentiment)
+        (!endDate || review.date <= endDate);
+      const likesMatch = review.countLikes >= minLikes;
+      const dislikesMatch = review.countDislikes <= maxDislikes;
+      const moodMatch = moods.includes(review.sentiment);
+
+      return (
+        titleMatch && dateMatch && likesMatch && dislikesMatch && moodMatch
       );
     })
     .sort((a, b) => {
@@ -47,4 +50,4 @@ const useFilteredReviews = (reviews) => {
   return filteredReviews;
 };
 
-export default useFilteredReviews;
+export default useFilterReviews;

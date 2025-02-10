@@ -43,6 +43,7 @@ const EditorPage = () => {
 
   const handleSentimentConfirm = (selectedSentiment) => {
     console.log('Chosen Sentiment:', sentiment);
+    setSentiment(selectedSentiment);
     console.log('Confirmed Sentiment:', selectedSentiment);
     setIsModalOpen(false);
     navigate(`/archive/1`);

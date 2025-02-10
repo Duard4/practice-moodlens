@@ -4,62 +4,62 @@
     "name": "Олена Петрова",
     "likes": 120,
     "avatar": "https://i.pravatar.cc/150?img=1",
-    "description": "A film enthusiast who loves exploring indie movies and writing detailed reviews."
+    "description": "Кіноманка, яка любить досліджувати інді-фільми та писати детальні рецензії."
   },
   {
     "id": "2",
     "name": "Ігор Коваленко",
     "likes": 110,
-    "avatar": "https://i.pravatar.cc/150?img=2",
-    "description": "A sci-fi fanatic with a passion for analyzing futuristic themes in movies."
+    "avatar": "https://i.pravatar.cc/150?img=60",
+    "description": "Фанат наукової фантастики з пристрастю до аналізу футуристичних тем у фільмах."
   },
   {
     "id": "3",
-    "name": "Марина Данилюк",
+    "name": "Марта Данилюк",
     "likes": 100,
-    "avatar": "https://i.pravatar.cc/150?img=3",
-    "description": "Loves romantic comedies and always finds the perfect balance between humor and heart."
+    "avatar": "https://i.pravatar.cc/150?img=43",
+    "description": "Любить романтичні комедії та завжди знаходить ідеальний баланс між гумором і серцем."
   },
   {
     "id": "4",
-    "name": "Анна Романюк",
+    "name": "Іванна Романюк",
     "likes": 90,
-    "avatar": "https://i.pravatar.cc/150?img=4",
-    "description": "A history buff who enjoys movies based on true events and historical dramas."
+    "avatar": "https://i.pravatar.cc/150?img=41",
+    "description": "Любителька історії, яка насолоджується фільмами на основі реальних подій та історичними драмами."
   },
   {
     "id": "5",
-    "name": "Сергій Мельник",
+    "name": "Анна Мельник",
     "likes": 80,
     "avatar": "https://i.pravatar.cc/150?img=5",
-    "description": "A fan of animated films and always highlights the artistry behind the animation."
+    "description": "Фанатка анімаційних фільмів, який завжди підкреслює мистецтво анімації."
   },
   {
     "id": "6",
     "name": "Олексій Кравець",
     "likes": 70,
     "avatar": "https://i.pravatar.cc/150?img=6",
-    "description": "A thriller junkie who loves dissecting plot twists and suspenseful moments."
+    "description": "Любитель трилерів, який обожнює розбирати сюжетні повороти та напружені моменти."
   },
   {
     "id": "7",
     "name": "Юлія Соловей",
     "likes": 60,
-    "avatar": "https://i.pravatar.cc/150?img=7",
-    "description": "A documentary lover who appreciates films that shed light on real-world issues."
+    "avatar": "https://i.pravatar.cc/150?img=19",
+    "description": "Любителька документальних фільмів, яка цінує фільми, що висвітлюють реальні проблеми."
   },
   {
     "id": "8",
     "name": "Дмитро Горбач",
     "likes": 50,
     "avatar": "https://i.pravatar.cc/150?img=8",
-    "description": "A fan of classic cinema and enjoys comparing modern films to timeless masterpieces."
+    "description": "Фанат класичного кіно, який насолоджується порівнянням сучасних фільмів з вічними шедеврами."
   },
   {
     "id": "9",
     "name": "Софія Матвієнко",
     "likes": 40,
     "avatar": "https://i.pravatar.cc/150?img=9",
-    "description": "A horror movie fan who loves analyzing the psychology behind scary films."
+    "description": "Фанатка фільмів жахів, яка любить аналізувати психологію страшних фільмів."
   }
 ]

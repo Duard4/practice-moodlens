@@ -1,7 +1,7 @@
 import { useSearchParams } from 'react-router-dom';
 import { useFormik } from 'formik';
 import Icon from './Icon';
-import style from './common.module.css';
+import styles from './common.module.css';
 
 const Filter = () => {
   const [searchParams, setSearchParams] = useSearchParams();
@@ -51,27 +51,24 @@ const Filter = () => {
   };
 
   return (
-    <form
-      onSubmit={formik.handleSubmit}
-      className="flex flex-col gap-2 sm:gap-4 p-4 bg-base-300 rounded-lg shadow-lg"
-    >
-      <div className="flex flex-col md:flex-row gap-4">
-        <div className="flex items-center bg-base-200 rounded-lg p-2 flex-grow h-12 md:h-16">
+    <form onSubmit={formik.handleSubmit} className={styles.form}>
+      <div className={styles.formRow}>
+        <div className={styles.searchContainer}>
           <input
             type="text"
             name="title"
             placeholder="Пошук..."
-            className={style.search}
+            className={styles.search}
             {...formik.getFieldProps('title')}
           />
-          <button type="submit" className="btn btn-ghost btn-circle">
+          <button type="submit" className={styles.searchButton}>
             <Icon icon="search" classes="w-6 h-6" />
           </button>
         </div>
 
-        <div className="flex flex-col sm:flex-row items-center gap-1 sm:gap-4 justify-between">
+        <div className={styles.selectContainer}>
           <select
-            className="select select-bordered h-12 md:h-16 shrink-0 sm:max-w-xs w-full md:w-auto"
+            className={styles.selectElement}
             {...formik.getFieldProps('sortBy')}
           >
             <option disabled>Сортувати за</option>
@@ -79,7 +76,7 @@ const Filter = () => {
             <option value="title">Назвою</option>
             <option value="popularity">Популярністю</option>
           </select>
-          <label className="label cursor-pointer ml-auto gap-2">
+          <label className={styles.checkboxLabel}>
             <span className="label-text">Інверсія</span>
             <input
               type="checkbox"
@@ -96,14 +93,14 @@ const Filter = () => {
         <input type="checkbox" />
         <div className="collapse-title font-medium">Фільтри</div>
         <div className="collapse-content flex flex-col gap-1 sm:gap-4">
-          <div className="flex flex-col md:flex-row gap-1 sm:gap-4">
-            <div className="form-control flex-grow">
+          <div className={styles.flexRow}>
+            <div className={styles.formControl}>
               <label className="label">
                 <span className="label-text">Початкова дата</span>
               </label>
               <input
                 type="date"
-                className="input input-bordered w-full"
+                className={styles.inputElement}
                 {...formik.getFieldProps('startDate')}
                 onChange={(e) => {
                   const value = e.target.value;
@@ -114,55 +111,55 @@ const Filter = () => {
                 }}
               />
             </div>
-            <div className="form-control flex-grow">
+            <div className={styles.formControl}>
               <label className="label">
                 <span className="label-text">Кінцева дата</span>
               </label>
               <input
                 type="date"
-                className="input input-bordered w-full"
+                className={styles.inputElement}
                 {...formik.getFieldProps('endDate')}
                 min={formik.values.startDate}
               />
             </div>
           </div>
 
-          {['minLikes', 'minSymbols', 'maxDislikes'].map((field) => (
-            <div key={field} className="form-control">
-              <label className="label">
-                <span className="label-text">
-                  {
+          <div className={styles.flexRow}>
+            {['minLikes', 'maxDislikes'].map((field) => (
+              <div key={field} className={styles.formControl}>
+                <label className="label">
+                  <span className="label-text">
                     {
-                      minLikes: 'Мінімум лайків',
-                      minSymbols: 'Мінімум символів',
-                      maxDislikes: 'Максимум дизлайків',
-                    }[field]
-                  }
-                </span>
-              </label>
-              <input
-                type="number"
-                className="input input-bordered w-full"
-                placeholder={`Введіть ${field}`}
-                {...formik.getFieldProps(field)}
-                min="0" // Додаємо атрибут min="0" для запобігання введення від'ємних значень
-              />
-            </div>
-          ))}
+                      {
+                        minLikes: 'Мінімум вподобань',
+                        maxDislikes: 'Максимум невподобань',
+                      }[field]
+                    }
+                  </span>
+                </label>
+                <input
+                  type="number"
+                  className={styles.inputElement}
+                  {...formik.getFieldProps(field)}
+                  min="0"
+                />
+              </div>
+            ))}
+          </div>
 
           <div className="form-control">
             <label className="label">
               <span className="label-text">Настрій відгуку</span>
             </label>
-            <div className="flex flex-col gap-2">
+            <div className={styles.moodContainer}>
               {['positive', 'neutral', 'negative'].map((mood) => (
-                <label key={mood} className="label cursor-pointer gap-2">
+                <label key={mood} className={styles.moodLabel}>
                   <span className="label-text">
                     {
                       {
-                        positive: 'Включити позитивні',
-                        neutral: 'Включити нейтральні',
-                        negative: 'Включити негативні',
+                        positive: 'Позитивний',
+                        neutral: 'Нейтральний',
+                        negative: 'Негативний',
                       }[mood]
                     }
                   </span>
