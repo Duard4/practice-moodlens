@@ -1,8 +1,4 @@
-import userData from '/src/data/topReviewers.json';
-
-const UserInfo = ({ userId }) => {
-  const user = userData.find((user) => user.id === userId);
-
+const UserInfo = ({ user }) => {
   if (!user) {
     return <div>User not found.</div>;
   }

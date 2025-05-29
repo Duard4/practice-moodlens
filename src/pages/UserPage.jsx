@@ -1,22 +1,18 @@
 import { useState, useEffect } from 'react';
 import { useParams, useNavigate } from 'react-router-dom';
 import * as Yup from 'yup';
-import userData from '/src/data/topReviewers.json';
 import styles from '../styles/UserPage.module.css';
 import AvatarSection from '../components/User/AvatarSection';
 import ProfileSection from '../components/User/ProfileSection';
 import EmailSection from '../components/User/EmailSection';
 import PasswordSection from '../components/User/PasswordSection';
 import toast from 'react-hot-toast';
+import { useSelector } from 'react-redux';
 
 const UserPage = () => {
-  const getCurrentUserId = () => {
-    return localStorage.getItem('currentUserId');
-  };
-
   const { id } = useParams();
-  const currentUserId = getCurrentUserId();
-  const isCurrentUser = id === currentUserId;
+  const currentUser = useSelector((state) => state.auth.user);
+  const isCurrentUser = id === currentUser._id;
   const navigate = useNavigate();
 
   useEffect(() => {
@@ -25,12 +21,12 @@ const UserPage = () => {
     }
   }, [isCurrentUser, navigate]);
 
-  const user = userData.find((user) => user.id === id);
+  const user = currentUser;
 
   const [tempUser, setTempUser] = useState({
     avatar: user?.avatar || '/default_avatar.jpg',
     username: user?.name || 'Невідомий користувач',
-    email: 'johndoe@example.com',
+    email: user?.email || 'johndoe@example.com',
     about: user?.description || 'Опис відсутній.',
   });
 

@@ -1,9 +1,6 @@
 import { useState } from 'react';
 import Icon from '../common/Icon';
 
-// const dark = 'coffee';
-// const light = 'bumblebee';
-// const ThemeController = () => {
 const ThemeController = () => {
   const [theme, setTheme] = useState('light');
   const toggleTheme = () => {

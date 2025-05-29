@@ -1,25 +1,31 @@
 import { useSearchParams } from 'react-router-dom';
 import { useFormik } from 'formik';
+import { useEffect } from 'react';
+import { useDispatch } from 'react-redux';
+import { getReviews } from '/src/redux/review/operation';
 import Icon from './Icon';
 import styles from './common.module.css';
 
-const Filter = () => {
+const Filter = ({ userId = null }) => {
   const [searchParams, setSearchParams] = useSearchParams();
+  const dispatch = useDispatch();
 
   const initialValues = {
     title: searchParams.get('title') || '',
     startDate: searchParams.get('startDate') || '',
     endDate: searchParams.get('endDate') || '',
     minLikes: searchParams.get('minLikes') || '',
-    minSymbols: searchParams.get('minSymbols') || '',
+    maxLikes: searchParams.get('maxLikes') || '',
+    minDislikes: searchParams.get('minDislikes') || '',
     maxDislikes: searchParams.get('maxDislikes') || '',
-    sortBy: searchParams.get('sortBy') || 'Датою виходу',
+    sortBy: searchParams.get('sortBy') || 'createdAt',
     invert: searchParams.get('invert') === 'true',
-    moods: searchParams.get('moods')?.split(',') || [
-      'positive',
-      'neutral',
-      'negative',
-    ],
+    sentiments: searchParams.get('sentiments')?.split(',') ||
+      searchParams.get('moods')?.split(',') || [
+        'positive',
+        'neutral',
+        'negative',
+      ],
   };
 
   const formik = useFormik({
@@ -30,24 +36,100 @@ const Filter = () => {
 
       Object.entries(values).forEach(([key, value]) => {
         if (Array.isArray(value)) {
-          if (value.length > 0) params.set(key, value.join(','));
-        } else if (value && value !== 'false') {
+          if (value.length > 0) {
+            if (key === 'sentiments') {
+              params.set('sentiments', value.join(','));
+            } else {
+              params.set(key, value.join(','));
+            }
+          }
+        } else if (value && value !== 'false' && value !== false) {
           params.set(key, value);
         }
       });
 
+      // Handle boolean flags specifically
       if (values.invert) params.set('invert', 'true');
 
       setSearchParams(params);
     },
   });
 
-  const handleMoodChange = (mood) => {
-    const newMoods = formik.values.moods.includes(mood)
-      ? formik.values.moods.filter((m) => m !== mood)
-      : [...formik.values.moods, mood];
+  // Trigger API call when URL params change
+  useEffect(() => {
+    const filters = buildFiltersFromSearchParams(searchParams);
+    const sortOrder = searchParams.get('invert') === 'true' ? 'desc' : 'asc';
+    const sortBy = searchParams.get('sortBy') || 'createdAt';
 
-    formik.setFieldValue('moods', newMoods);
+    const apiParams = {
+      page: 1,
+      perPage: 10,
+      sortBy,
+      sortOrder,
+      filters,
+    };
+
+    // Add userId if provided (for user-specific pages)
+    if (userId) {
+      apiParams.userId = userId;
+    }
+
+    dispatch(getReviews(apiParams));
+  }, [searchParams, dispatch, userId]);
+
+  const handleSentimentChange = (sentiment) => {
+    const newSentiments = formik.values.sentiments.includes(sentiment)
+      ? formik.values.sentiments.filter((s) => s !== sentiment)
+      : [...formik.values.sentiments, sentiment];
+
+    formik.setFieldValue('sentiments', newSentiments);
+  };
+
+  const handleReset = () => {
+    formik.resetForm();
+    setSearchParams(new URLSearchParams());
+  };
+
+  const buildFiltersFromSearchParams = (searchParams) => {
+    const filters = {};
+
+    // Text search
+    if (searchParams.get('title')) {
+      filters.title = searchParams.get('title');
+    }
+
+    // Date range
+    if (searchParams.get('startDate')) {
+      filters.startDate = searchParams.get('startDate');
+    }
+    if (searchParams.get('endDate')) {
+      filters.endDate = searchParams.get('endDate');
+    }
+
+    // Likes range
+    if (searchParams.get('minLikes')) {
+      filters.minLikes = Number(searchParams.get('minLikes'));
+    }
+    if (searchParams.get('maxLikes')) {
+      filters.maxLikes = Number(searchParams.get('maxLikes'));
+    }
+
+    // Dislikes range
+    if (searchParams.get('minDislikes')) {
+      filters.minDislikes = Number(searchParams.get('minDislikes'));
+    }
+    if (searchParams.get('maxDislikes')) {
+      filters.maxDislikes = Number(searchParams.get('maxDislikes'));
+    }
+
+    // Sentiment filter
+    if (searchParams.get('sentiments') || searchParams.get('moods')) {
+      const sentiments =
+        searchParams.get('sentiments') || searchParams.get('moods');
+      filters.sentiments = sentiments.split(',');
+    }
+
+    return filters;
   };
 
   return (
@@ -57,7 +139,7 @@ const Filter = () => {
           <input
             type="text"
             name="title"
-            placeholder="Пошук..."
+            placeholder="Пошук за назвою фільму або текстом рецензії..."
             className={styles.search}
             {...formik.getFieldProps('title')}
           />
@@ -72,9 +154,12 @@ const Filter = () => {
             {...formik.getFieldProps('sortBy')}
           >
             <option disabled>Сортувати за</option>
+            <option value="createdAt">Датою створення</option>
             <option value="date">Датою виходу</option>
             <option value="title">Назвою</option>
-            <option value="popularity">Популярністю</option>
+            <option value="rating">Рейтингом</option>
+            <option value="likes">Кількістю вподобань</option>
+            <option value="dislikes">Кількістю невподобань</option>
           </select>
           <label className={styles.checkboxLabel}>
             <span className="label-text">Інверсія</span>
@@ -91,8 +176,9 @@ const Filter = () => {
 
       <div className="collapse collapse-arrow bg-base-200">
         <input type="checkbox" />
-        <div className="collapse-title font-medium">Фільтри</div>
+        <div className="collapse-title font-medium">Розширені фільтри</div>
         <div className="collapse-content flex flex-col gap-1 sm:gap-4">
+          {/* Date Range */}
           <div className={styles.flexRow}>
             <div className={styles.formControl}>
               <label className="label">
@@ -124,54 +210,98 @@ const Filter = () => {
             </div>
           </div>
 
+          {/* Likes Range */}
           <div className={styles.flexRow}>
-            {['minLikes', 'maxDislikes'].map((field) => (
-              <div key={field} className={styles.formControl}>
-                <label className="label">
-                  <span className="label-text">
-                    {
-                      {
-                        minLikes: 'Мінімум вподобань',
-                        maxDislikes: 'Максимум невподобань',
-                      }[field]
-                    }
-                  </span>
-                </label>
-                <input
-                  type="number"
-                  className={styles.inputElement}
-                  {...formik.getFieldProps(field)}
-                  min="0"
-                />
-              </div>
-            ))}
+            <div className={styles.formControl}>
+              <label className="label">
+                <span className="label-text">Мінімум вподобань</span>
+              </label>
+              <input
+                type="number"
+                className={styles.inputElement}
+                {...formik.getFieldProps('minLikes')}
+                min="0"
+              />
+            </div>
+            <div className={styles.formControl}>
+              <label className="label">
+                <span className="label-text">Максимум вподобань</span>
+              </label>
+              <input
+                type="number"
+                className={styles.inputElement}
+                {...formik.getFieldProps('maxLikes')}
+                min="0"
+              />
+            </div>
           </div>
 
+          {/* Dislikes Range */}
+          <div className={styles.flexRow}>
+            <div className={styles.formControl}>
+              <label className="label">
+                <span className="label-text">Мінімум невподобань</span>
+              </label>
+              <input
+                type="number"
+                className={styles.inputElement}
+                {...formik.getFieldProps('minDislikes')}
+                min="0"
+              />
+            </div>
+            <div className={styles.formControl}>
+              <label className="label">
+                <span className="label-text">Максимум невподобань</span>
+              </label>
+              <input
+                type="number"
+                className={styles.inputElement}
+                {...formik.getFieldProps('maxDislikes')}
+                min="0"
+              />
+            </div>
+          </div>
+
+          {/* Sentiment Filter */}
           <div className="form-control">
             <label className="label">
               <span className="label-text">Настрій відгуку</span>
             </label>
             <div className={styles.moodContainer}>
-              {['positive', 'neutral', 'negative'].map((mood) => (
-                <label key={mood} className={styles.moodLabel}>
+              {['positive', 'neutral', 'negative'].map((sentiment) => (
+                <label key={sentiment} className={styles.moodLabel}>
                   <span className="label-text">
                     {
                       {
                         positive: 'Позитивний',
                         neutral: 'Нейтральний',
                         negative: 'Негативний',
-                      }[mood]
+                      }[sentiment]
                     }
                   </span>
                   <input
                     type="checkbox"
                     className="checkbox"
-                    checked={formik.values.moods.includes(mood)}
-                    onChange={() => handleMoodChange(mood)}
+                    checked={formik.values.sentiments.includes(sentiment)}
+                    onChange={() => handleSentimentChange(sentiment)}
                   />
                 </label>
               ))}
             </div>
+          </div>
+
+          {/* Action Buttons */}
+          <div className="flex gap-2">
+            <button type="submit" className="btn btn-primary">
+              Застосувати фільтри
+            </button>
+            <button
+              type="button"
+              className="btn btn-outline"
+              onClick={handleReset}
+            >
+              Скинути
+            </button>
           </div>
         </div>
       </div>

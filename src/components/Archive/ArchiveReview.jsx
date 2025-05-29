@@ -9,17 +9,19 @@ const ArchiveReview = ({ review, isCurrentUser, onDelete }) => {
     // Navigate to the Editor page with review data
     navigate('/editor', {
       state: {
-        reviewId: review.id,
-        reviewTitle: review.title,
-        filmTitle: review.movieTitle,
-        reviewContent: review.content,
+        reviewId: review._id,
+        title: review.title,
+        movieTitle: review.movieTitle,
+        text: review.text,
+        rating: review.rating,
+        isEditing: true,
       },
     });
   };
 
   const handleDelete = () => {
     if (window.confirm('Are you sure you want to delete this review?')) {
-      onDelete(review.id);
+      onDelete(review._id);
     }
   };
 

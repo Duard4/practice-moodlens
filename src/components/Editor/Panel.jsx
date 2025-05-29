@@ -3,16 +3,16 @@ import styles from './Editor.module.css';
 
 const Panel = ({ onSubmit, initialData }) => {
   const [reviewTitle, setReviewTitle] = useState(initialData.reviewTitle);
-  const [filmTitle, setFilmTitle] = useState(initialData.filmTitle);
+  const [movieTitle, setMovieTitle] = useState(initialData.movieTitle);
   const [rating, setRating] = useState(initialData.rating);
 
   useEffect(() => {
     const savedReviewTitle = localStorage.getItem('reviewTitle');
-    const savedFilmTitle = localStorage.getItem('filmTitle');
+    const savedMovieTitle = localStorage.getItem('movieTitle');
     const savedRating = localStorage.getItem('rating');
 
     if (savedReviewTitle) setReviewTitle(savedReviewTitle);
-    if (savedFilmTitle) setFilmTitle(savedFilmTitle);
+    if (savedMovieTitle) setMovieTitle(savedMovieTitle);
     if (savedRating) setRating(savedRating);
   }, []);
 
@@ -21,8 +21,8 @@ const Panel = ({ onSubmit, initialData }) => {
   }, [reviewTitle]);
 
   useEffect(() => {
-    localStorage.setItem('filmTitle', filmTitle);
-  }, [filmTitle]);
+    localStorage.setItem('movieTitle', movieTitle);
+  }, [movieTitle]);
 
   useEffect(() => {
     localStorage.setItem('rating', rating);
@@ -30,11 +30,11 @@ const Panel = ({ onSubmit, initialData }) => {
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    onSubmit({ reviewTitle, filmTitle, rating });
+    onSubmit({ reviewTitle, movieTitle, rating });
     localStorage.removeItem('reviewTitle');
-    localStorage.removeItem('filmTitle');
+    localStorage.removeItem('movieTitle');
     localStorage.removeItem('rating');
-    localStorage.removeItem('content');
+    localStorage.removeItem('text');
   };
 
   return (
@@ -54,13 +54,13 @@ const Panel = ({ onSubmit, initialData }) => {
           />
         </div>
 
-        {/* Film Title */}
+        {/* Movie Title */}
         <div className="mb-4">
           <label className="block text-sm font-medium mb-2">Назва фільму</label>
           <input
             type="text"
-            value={filmTitle}
-            onChange={(e) => setFilmTitle(e.target.value)}
+            value={movieTitle}
+            onChange={(e) => setMovieTitle(e.target.value)}
             className={styles.inputField}
             placeholder="Введіть назву фільму"
             required

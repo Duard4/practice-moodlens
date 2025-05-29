@@ -1,7 +1,9 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import Layout from './components/Layout';
 import { Navigate, Route, Routes } from 'react-router-dom';
 import './App.css';
+import { useDispatch, useSelector } from 'react-redux';
+import { getUser } from './redux/auth/operation';
 
 const AnaliticPage = React.lazy(() => import('./pages/AnaliticPage'));
 const ArchivePage = React.lazy(() => import('./pages/ArchivePage'));
@@ -11,7 +13,14 @@ const ReviewDetail = React.lazy(() => import('./pages/ReviewDetail'));
 const UserPage = React.lazy(() => import('./pages/UserPage'));
 
 function App() {
-  localStorage.setItem('currentUserId', 1);
+  const dispatch = useDispatch();
+  const { user } = useSelector((state) => state.auth);
+
+  useEffect(() => {
+    if (!user) {
+      dispatch(getUser());
+    }
+  }, [dispatch, user]);
 
   return (
     <Layout>

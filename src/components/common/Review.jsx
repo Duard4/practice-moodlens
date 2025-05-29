@@ -4,21 +4,24 @@ import BaseButtons from './btns/BaseButtons';
 import Icon from './Icon';
 
 const Review = ({ review, children }) => {
+  let date = new Date(review.createdAt);
+  review.date = date.toISOString().split('T')[0];
+
   return (
     <div className="card bg-base-300 shadow-xl shadow-base-300-content h-full w-auto min-w-0">
       <div className="card-body p-4 sm:p-8">
         <h3 className="card-title">
-          <span className="mb-1">{review.title}</span>
+          <span>{review.title}</span>
           <SentimentLabel sentiment={review.sentiment} />
         </h3>
         <div className="flex justify-between items-center mb-0.5">
           <Link to={`/archive/${review.userId}`}>
             <span className="text-md opacity-50 cursor-pointer hover:text-primary hover:opacity-1">
-              {review.author}
+              {review?.authorName}
             </span>
           </Link>
           <span className="text-md opacity-50">
-            {review.date.split('-').reverse().join('.')}
+            {review.date?.split('-').reverse().join('.')}
           </span>
         </div>
         <div className="flex justify-between">
@@ -31,8 +34,8 @@ const Review = ({ review, children }) => {
           )}
         </div>
 
-        <Link to={`/reviews/${review.id}`}>
-          <p className="line-clamp-5 text-ellipsis">{review.content}</p>
+        <Link to={`/reviews/${review._id}`}>
+          <p className="line-clamp-5 text-ellipsis">{review.text}</p>
         </Link>
         <div className="flex flex-wrap card-actions justify-end items-center mt-auto">
           {children}
