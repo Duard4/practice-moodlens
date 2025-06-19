@@ -14,7 +14,6 @@ const ReviewDetail = () => {
   const { id } = useParams();
   const dispatch = useDispatch();
 
-  // Get data from Redux store
   const {
     currentReview: review,
     loading: reviewLoading,
@@ -64,8 +63,11 @@ const ReviewDetail = () => {
       ).unwrap();
 
       toast.success('Comment added successfully!');
+
+      // Refetch comments after successfully adding a new one
+      dispatch(getComments(id));
     } catch (error) {
-      // Error is already handled by the slice
+      toast.error('Failed to add comment');
     }
   };
 

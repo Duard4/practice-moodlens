@@ -3,7 +3,6 @@ import axios from 'axios';
 
 axios.defaults.baseURL = 'https://sentiment-back.onrender.com';
 
-// Get all reviews with comprehensive filtering, sorting, and search
 export const getReviews = createAsyncThunk(
   'review/getReviews',
   async (params = {}, { rejectWithValue }) => {

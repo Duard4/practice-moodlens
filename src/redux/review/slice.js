@@ -1,4 +1,3 @@
-// reviewSlice.js - Updated slice with pagination and sentiment stats
 import { createSlice } from '@reduxjs/toolkit';
 import {
   addReview,
@@ -20,6 +19,7 @@ const initialState = {
     negative: 0,
     null: 0,
   },
+
   pagination: {
     currentPage: 1,
     totalPages: 1,
@@ -76,7 +76,7 @@ const reviewSlice = createSlice({
         state.sentimentStats =
           action.payload.sentimentStats || state.sentimentStats;
         state.pagination = {
-          currentPage: action.payload.currentPage || 1,
+          currentPage: action.payload.page || 1,
           totalPages: action.payload.totalPages || 1,
           totalItems: action.payload.totalItems || 0,
           hasNextPage: action.payload.hasNextPage || false,
@@ -135,7 +135,6 @@ const reviewSlice = createSlice({
         state.error = action.payload;
         state.success = false;
       })
-
       // Delete review
       .addCase(deleteReview.pending, (state) => {
         state.loading = true;

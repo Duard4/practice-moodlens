@@ -1,65 +1,32 @@
-import { useSearchParams } from 'react-router-dom';
+// Filter.js - Refactored with cleaner search params handling
 import { useFormik } from 'formik';
 import { useEffect } from 'react';
 import { useDispatch } from 'react-redux';
 import { getReviews } from '/src/redux/review/operation';
+import useSearchParamsFilters from '../../hooks/useSearchParamsFilters';
 import Icon from './Icon';
 import styles from './common.module.css';
 
 const Filter = ({ userId = null }) => {
-  const [searchParams, setSearchParams] = useSearchParams();
   const dispatch = useDispatch();
-
-  const initialValues = {
-    title: searchParams.get('title') || '',
-    startDate: searchParams.get('startDate') || '',
-    endDate: searchParams.get('endDate') || '',
-    minLikes: searchParams.get('minLikes') || '',
-    maxLikes: searchParams.get('maxLikes') || '',
-    minDislikes: searchParams.get('minDislikes') || '',
-    maxDislikes: searchParams.get('maxDislikes') || '',
-    sortBy: searchParams.get('sortBy') || 'createdAt',
-    invert: searchParams.get('invert') === 'true',
-    sentiments: searchParams.get('sentiments')?.split(',') ||
-      searchParams.get('moods')?.split(',') || [
-        'positive',
-        'neutral',
-        'negative',
-      ],
-  };
+  const {
+    currentValues,
+    updateParams,
+    getApiFilters,
+    getSortParams,
+    resetParams,
+  } = useSearchParamsFilters();
 
   const formik = useFormik({
-    initialValues,
+    initialValues: currentValues,
     enableReinitialize: true,
-    onSubmit: (values) => {
-      const params = new URLSearchParams();
-
-      Object.entries(values).forEach(([key, value]) => {
-        if (Array.isArray(value)) {
-          if (value.length > 0) {
-            if (key === 'sentiments') {
-              params.set('sentiments', value.join(','));
-            } else {
-              params.set(key, value.join(','));
-            }
-          }
-        } else if (value && value !== 'false' && value !== false) {
-          params.set(key, value);
-        }
-      });
-
-      // Handle boolean flags specifically
-      if (values.invert) params.set('invert', 'true');
-
-      setSearchParams(params);
-    },
+    onSubmit: updateParams,
   });
 
   // Trigger API call when URL params change
   useEffect(() => {
-    const filters = buildFiltersFromSearchParams(searchParams);
-    const sortOrder = searchParams.get('invert') === 'true' ? 'desc' : 'asc';
-    const sortBy = searchParams.get('sortBy') || 'createdAt';
+    const filters = getApiFilters();
+    const { sortBy, sortOrder } = getSortParams();
 
     const apiParams = {
       page: 1,
@@ -69,13 +36,12 @@ const Filter = ({ userId = null }) => {
       filters,
     };
 
-    // Add userId if provided (for user-specific pages)
     if (userId) {
       apiParams.userId = userId;
     }
 
     dispatch(getReviews(apiParams));
-  }, [searchParams, dispatch, userId]);
+  }, [getApiFilters, getSortParams, dispatch, userId]);
 
   const handleSentimentChange = (sentiment) => {
     const newSentiments = formik.values.sentiments.includes(sentiment)
@@ -87,49 +53,7 @@ const Filter = ({ userId = null }) => {
 
   const handleReset = () => {
     formik.resetForm();
-    setSearchParams(new URLSearchParams());
-  };
-
-  const buildFiltersFromSearchParams = (searchParams) => {
-    const filters = {};
-
-    // Text search
-    if (searchParams.get('title')) {
-      filters.title = searchParams.get('title');
-    }
-
-    // Date range
-    if (searchParams.get('startDate')) {
-      filters.startDate = searchParams.get('startDate');
-    }
-    if (searchParams.get('endDate')) {
-      filters.endDate = searchParams.get('endDate');
-    }
-
-    // Likes range
-    if (searchParams.get('minLikes')) {
-      filters.minLikes = Number(searchParams.get('minLikes'));
-    }
-    if (searchParams.get('maxLikes')) {
-      filters.maxLikes = Number(searchParams.get('maxLikes'));
-    }
-
-    // Dislikes range
-    if (searchParams.get('minDislikes')) {
-      filters.minDislikes = Number(searchParams.get('minDislikes'));
-    }
-    if (searchParams.get('maxDislikes')) {
-      filters.maxDislikes = Number(searchParams.get('maxDislikes'));
-    }
-
-    // Sentiment filter
-    if (searchParams.get('sentiments') || searchParams.get('moods')) {
-      const sentiments =
-        searchParams.get('sentiments') || searchParams.get('moods');
-      filters.sentiments = sentiments.split(',');
-    }
-
-    return filters;
+    resetParams();
   };
 
   return (

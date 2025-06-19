@@ -8,6 +8,7 @@ import toast from 'react-hot-toast';
 import {
   addReview,
   addReviewFeedback,
+  deleteReview,
   updateReview,
 } from '../redux/review/operation';
 
@@ -19,9 +20,11 @@ const EditorPage = () => {
   const { loading, error } = useSelector((state) => state.review);
   const addedReview = useSelector((state) => state.review.addedReview);
 
-  const [reviewContent, setReviewContent] = useState(state?.text || '');
+  const [reviewContent, setReviewContent] = useState(
+    state?.text || localStorage.getItem('content') || '',
+  );
   const [contentLength, setContentLength] = useState(
-    (state?.text || '').length,
+    (state?.text || localStorage.getItem('content') || '').length,
   );
 
   const currentUser = useSelector((state) => state.auth?.user);
@@ -117,13 +120,16 @@ const EditorPage = () => {
       dispatch(addReviewFeedback(feedBackData));
 
       toast.success('Рецензію успішно додано!', { position: 'top-center' });
-      navigate(`/archive/${currentUser._id}`);
+      navigate(`/archive/${currentUser._id}?invert=true`);
+      localStorage.removeItem('content');
     } catch (err) {
       console.error('Error updating review sentiment:', err);
     }
   };
 
   const handleSentimentCancel = () => {
+    let reviewId = addedReview.data._id;
+    dispatch(deleteReview(reviewId));
     setIsModalOpen(false);
   };
 

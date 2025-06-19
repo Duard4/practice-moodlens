@@ -45,13 +45,15 @@ const MenuContent = ({ drawer = false }) => {
     }
   };
 
-  const menuItems = [{ to: '/reviews', label: 'Рецензії', icon: 'article' }];
+  const menuItems = [
+    { to: '/reviews?invert=true', label: 'Рецензії', icon: 'article' },
+  ];
 
   if (isAuthenticated) {
     menuItems.push(
       { to: '/editor', label: 'Едітор', icon: 'feather' },
       {
-        to: `/archive/${user?._id || user?.id}`,
+        to: `/archive/${user?._id || user?.id}?invert=true`,
         label: 'Архів',
         icon: 'archive',
       },

@@ -1,0 +1,13 @@
+{
+  "folders": [
+	{
+		"path": "../../../../sentiment"
+	},
+	{
+		"path": "../.."
+	}
+],
+  "settings": {
+    "liveServer.settings.multiRootWorkspaceName": "sentiment"
+  }
+}
